@@ -1,0 +1,263 @@
+\documentclass{article}
+
+% if you need to pass options to natbib, use, e.g.:
+% \PassOptionsToPackage{numbers, compress}{natbib}
+% before loading nips_2017
+%
+% to avoid loading the natbib package, add option nonatbib:
+% \usepackage[nonatbib]{nips_2017}
+
+%\usepackage{main}
+
+% to compile a camera-ready version, add the [final] option, e.g.:
+\usepackage[final]{main}
+
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{hyperref}       % hyperlinks
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{bbm}
+\usepackage{enumerate}
+\usepackage[linguistics]{forest}
+\usepackage{adjustbox}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter{\floor}{\lfoor}{\rfloor}
+%\usepackage[margin=0.5in]{geometry}
+%\DeclareMathOperator*{\argmax}{argmax}
+
+\usepackage{listings}
+\usepackage{color}
+
+\newcommand{\matr}[1]{\bm{#1}}     % ISO complying version
+\newcommand{\vect}[1]{\bm{#1}}     % ISO complying version
+ 
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+ 
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\ttfamily\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\small,
+    columns=fullflexible,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=t,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=4,
+}
+ 
+\lstset{style=mystyle}
+
+\title{Deep Learning - Spring 2019\\
+       \Large Homework 2}
+\graphicspath{{images/}}
+\setcitestyle{round, sort, numbers}
+
+% The \author macro works with any number of authors. There are two
+% commands used to separate the names and addresses of multiple
+% authors: \And and \AND.
+%
+% Using \And between authors leaves it to LaTeX to determine where to
+% break the lines. Using \AND forces a line break at that point. So,
+% if LaTeX puts 3 of 4 authors names on the first line, and the last
+% on the second line, try using \AND instead of \And before the third
+% author name.
+
+\author{
+  Daniel Rivera Ruiz\\
+  Department of Computer Science\\
+  New York University\\
+  \href{mailto:drr342@nyu.edu}{\texttt{drr342@nyu.edu}}\\
+}
+
+\begin{document}
+
+\maketitle
+
+% \cite{} - in-line citation author, year in parenthesis.
+% \citep{} - all citation info in parenthesis.
+
+%	\begin{figure}[ht]
+%		\centering
+%		\frame{
+%            \includegraphics[width=1.0\linewidth]{tree.png}
+%       }
+%		\caption{Classification results for the sentence \textit{"There are slow and repetitive parts, but it has just enough spice to keep it                  interesting."} using the Stanford Sentiment Treebank. As can be seen, sentiment scores are available for each phrase.}
+%		\label{tree}
+%	\end{figure}
+
+\section*{1. Fundamentals}
+\subsection*{1.1. Convolution}
+Figure \ref{fig1} depicts two matrices. The one on the left represents a $5\times 5$ single-channel image $\matr{A}$. The one on the right
+ represents a $3\times 3$ convolution kernel $\matr{B}$. 
+\begin{itemize}
+    \item[(a)] What is the dimensionality of the output if we forward propagate the image over the given convolution kernel with no padding and stride of 1? \\
+    \textbf{\textit{Solution.}} \\
+    We can align the convolution kernel with the first three elements of the input matrix $\matr{A}$ (trying to align it with he fourth element would result in the kernel going beyond $\matr{A}$ and the convolution operation would be undefined). Therefore, the dimensionality of the output matrix is $3 \times 3$.
+    \item[(b)] Give a general formula of the output width $O$ in terms of the input width $I$, kernel width $K$, stride $S$, and padding $P$ (both in the beginning and in the end). Note that the same formula holds for the height. Make sure that your answer in part (a) is consistent with your formula. \\
+    \textbf{\textit{Solution.}} \\
+    The formula is
+    \begin{equation*}
+        O = \left\lfloor \frac{I + 2P - K}{S} + 1 \right\rfloor
+    \end{equation*}
+    which is consistent with the previous answer for $I = 5$, $P = 0$, $K = 3$ and $S = 1$.
+    \item[(c)] Compute the output $\matr{C}$ of forward propagating the image over the given convolution kernel. Assume that the bias term of the convolution is zero. \\
+    \textbf{\textit{Solution.}} \\
+    The output matrix $\matr{C}$ is defined as follows:
+    \begin{equation*}
+        \matr{C} = [\matr{C}_{ij}] = [\matr{A}[ij:(i+2)(j+2)] * \matr{B} + b_{ij}] \quad i,j\in\{1,2,3\}
+    \end{equation*}
+    where $\matr{A}[ij:(i+2)(j+2)]$ is the submatrix of $\matr{A}$ starting at $A_{ij}$ and ending at $A_{(i+2)(j+2)}$, and $b_{ij}$ is the bias term. Since we know that $b_{ij} = 0 \; \forall \; i,j$, we only need to compute the convolution which is defined as follows:
+    \begin{equation*}
+        \matr{A} * \matr{B} = \sum_i \sum_j \matr{A}_{ij} \cdot \matr{B}_{ij}
+    \end{equation*}
+    Using this formula we arrive to the final expression for $\matr{C}$:
+    \begin{equation*}
+        \matr{C} = \begin{bmatrix} 
+                        109 & 92 & 72 \\
+                        108 & 85 & 74 \\
+                        110 & 74 & 79 \\
+                    \end{bmatrix}
+    \end{equation*}
+    \item[(d)] Suppose the gradient backpropagated from the layers above this layer is a $3\times 3$ matrix of all 1s. Write the value of the gradient (w.r.t.~the input image) backpropagated out of this layer.
+\end{itemize}
+ 
+\begin{figure}[!ht]
+    \begin{equation*}
+        \matr{A} = \begin{bmatrix} 
+                        4 & 5 & 2 & 2 & 1 \\
+                        3 & 3 & 2 & 2 & 4 \\ 
+                        4 & 3 & 4 & 1 & 1 \\ 
+                        5 & 1 & 4 & 1 & 2 \\ 
+                        5 & 1 & 3 & 1 & 4 \\ 
+                    \end{bmatrix}
+        \quad \quad
+        \matr{B} = \begin{bmatrix} 
+                        4 & 3 & 3 \\
+                        5 & 5 & 5 \\
+                        2 & 4 & 3 \\
+                    \end{bmatrix}
+    \end{equation*}
+    \caption{Image Matrix ($5\times 5$) and a convolution kernel ($3\times 3$).}
+    \label{fig1}
+\end{figure}
+
+ Hint: You are given that $\frac{\partial E}{\partial \matr{C}_{ij}} = 1$ for some scalar error $E$ and $i,j\in\{1,2,3\}$. You need to compute $\frac{\partial E}{\partial \matr{A}_{ij}}$ for  $i,j\in\{1, \ldots, 5\}$. The chain rule should help!
+ 
+ \textbf{\textit{Solution.}} \\
+First we notice that $\matr{A}_{ij}$ will (potentially) appear in the expression for $\matr{C}_{kl}$ as follows:
+
+\begin{equation*}
+    \matr{C}_{kl} = \ldots + \matr{A}_{ij} \cdot \matr{B}_{(i-k+1)(j-l+1)} + \ldots
+\end{equation*}
+
+We know by definition that $i,j\in\{1,2,3,4,5\}$ and $k,l\in\{1,2,3\}$. However, the indices for $\matr{B}$ should also fall within the values $\{1,2,3\}$. If this is not the case, it means that the element $\matr{A}_{ij}$ we are considering is in fact outside the scope of the convolution. With this restriction we can write the partial derivative for $\matr{C}_{kl}$ as follows:
+
+\begin{equation*}
+    \frac{\partial \matr{C}_{kl}}{\partial \matr{A}_{ij}} = 
+    \begin{cases} 
+      \matr{B}_{(i-k+1)(j-l+1)} & 1 \leq i-k+1 \leq 3 \land 1 \leq j-l+1 \leq 3 \\
+      0 & \text{otherwise}
+   \end{cases}
+\end{equation*}
+
+Using the fact that $\frac{\partial E}{\partial \matr{C}_{ij}} = 1$ and applying the chain rule we can write:
+
+\begin{align*}
+    \frac{\partial E}{\partial \matr{A}_{ij}} &= \sum_{k=1}^3 \sum_{l=1}^3 \left( \frac{\partial E}{\partial \matr{C}_{kl}} \cdot \frac{\partial \matr{C}_{kl}}{\partial \matr{A}_{ij}} \right) \\
+    &= \sum_{k=1}^3 \sum_{l=1}^3 \matr{B}_{(i-k+1)(j-l+1)} \mathbbm{1}(1 \leq i-k+1 \leq 3 \land 1 \leq j-l+1 \leq 3)
+\end{align*}
+
+where $\mathbbm{1}$ is the indicator function. This definition tells us that once we set an element $\matr{A}_{ij}$ from the input matrix, we can calculate the partial derivative of the error $E$ as a sum of elements from the kernel $\matr{B}$. If at some point during the summation we encounter an index that is out of bounds for $\matr{B}$, we simply add $0$.
+
+Thus, the desired backpropagated gradient is
+
+\begin{align*}
+    \frac{\partial E}{\partial \bm{A}} &= \left[ \frac{\partial E}{\partial \matr{A}_{ij}} \right] \quad i,j\in\{1,2,3,4,5\} \\
+                &= \begin{bmatrix}
+                    4 & 7 & 10 & 6 & 3 \\
+                    9 & 17 & 25 & 16 & 8 \\
+                    11 & 23 & 34 & 23 & 11 \\
+                    7 & 16 & 24 & 17 & 8 \\
+                    2 & 6 & 9 & 7 & 3 \\
+                \end{bmatrix}
+\end{align*}
+ 
+\newpage
+\subsection*{1.2. Pooling}
+The pooling is a technique for sub-sampling and comes in different flavors, for example max-pooling, average pooling, LP-pooling. 
+\begin{itemize}
+    \item[(a)] List the \texttt{torch.nn} modules for the 2D versions of these pooling techniques and read on what they do. \\
+    \textbf{\textit{Solution.}}
+        \begin{itemize}
+            \item \texttt{torch.nn.MaxPool2d}
+            \item \texttt{torch.nn.AvgPool2d}
+            \item \texttt{torch.nn.FractionalMaxPool2d}
+            \item \texttt{torch.nn.LPPool2d}
+            \item \texttt{torch.nn.AdaptiveMaxPool2d}
+            \item \texttt{torch.nn.AdaptiveAvgPool2d}
+        \end{itemize}
+    \item[(b)] Denote the $k$-th input feature maps to a pooling module as $\matr{X}^k \in \mathbb{R}^{H_{\textrm{in}}\times W_{\textrm{in}}} $ where $H_{\textrm{in}}$ and $W_{\text{in}}$ represent the input height and width, respectively. Let $\matr{Y}^k \in \mathbb{R}^{H_{\text{out}}\times W_{\textrm{out}}}$ denote the $k$-th output feature map of the module where $H_{\textrm{out}}$ and $W_{\textrm{out}}$ represent the output height and width, respectively. Let $S^{k}_{i,j}$ be a list of the indexes of elements in the sub-region of $X^k $ used for generating $\matr{Y}^k_{i,j}$, the $(i,j)$-th entry of $\matr{Y}^{k}$. 
+    Using this notation, give formulas for $\matr{Y}^k_{i,j} $ from three pooling modules. \\
+    \textbf{\textit{Solution.}} \\
+    For the max-pooling, average pooling and LP-pooling (p-norm) modules we have:
+    \begin{align*}
+        \matr{Y}_{\max}^k &= \left[\matr{Y}^k_{i,j}\right]_{i \in H_{\text{out}}, j \in W_{\text{out}}} = \max_{s \in S^{k}_{i,j}}(\matr{X}^k[s]) \\
+        \matr{Y}_{\text{avg}}^k &= \left[\matr{Y}^k_{i,j}\right]_{i \in H_{\text{out}}, j \in W_{\text{out}}} = \frac{1}{|S^{k}_{i,j}|}\sum_{s \in S^{k}_{i,j}} \matr{X}^k[s] \\
+        \matr{Y}_{LP_p}^k &= \left[\matr{Y}^k_{i,j}\right]_{i \in H_{\text{out}}, j \in W_{\text{out}}} = \left(\sum_{s \in S^{k}_{i,j}} \left( \matr{X}^k[s] \right)^p\right)^{\frac{1}{p}}
+    \end{align*}
+    \item[(c)] Write out the result of applying a max-pooling module with kernel size of 2 and stride of 1 to $\matr{C}$ from Part 1.1.\\
+    \textbf{\textit{Solution.}} \\
+    \begin{equation*}
+        \matr{C}_{\max} = \begin{bmatrix}
+                        109 & 92 \\
+                        110 & 85 \\
+                    \end{bmatrix}
+    \end{equation*}
+    \item[(d)] Show how and why max-pooling and average pooling can be expressed in terms of LP-pooling.\\
+    \textbf{\textit{Solution.}}
+    \begin{itemize}
+        \item Max-pooling.\\
+        If we look at the definition of LP-pooling with $p \rightarrow \infty$ we get:
+        \begin{equation*}
+            \matr{Y}_{LP_{\infty}} = \underset{p \rightarrow \infty}{\lim}\left(\sum_{s \in S^{k}_{i,j}} \left( \matr{X}[s] \right)^p \right)^{\frac{1}{p}}
+        \end{equation*}
+        Let $s_j = \text{argmax}(\matr{X}[s])$. It is clear that as $p \rightarrow \infty$, $\left( \matr{X}[s_j] \right)^p \gg \left( \matr{X}[s_i] \right)^p \; \forall \; i \neq j$, and therefore the summation can be rewritten as
+        \begin{equation*}
+            \sum_{s \in S^{k}_{i,j}} \left( \matr{X}[s] \right)^p = \left( \matr{X}[s_j] \right)^p
+        \end{equation*}
+        If we replace this in the expression for $\matr{Y}_{LP_{\infty}}$ we get:
+        \begin{align*}
+            \matr{Y}_{LP_{\infty}} &= \underset{p \rightarrow \infty}{\lim} \left(  \left( \matr{X}[s_j] \right)^p \right)^{\frac{1}{p}} = \underset{p \rightarrow \infty}{\lim} \matr{X}[s_j] = \matr{X}[s_j] \\
+             &= \max_{s \in S}(\matr{X}[s]) \\
+             &= \matr{Y}_{\max}
+        \end{align*}
+        \item Average pooling.\\
+        In this case it is straightforward that with $p=1$ we have:
+        \begin{equation*}
+            \matr{Y}_{\text{avg}} = \frac{1}{|\matr{S}|} \cdot \matr{Y}_{LP_1}
+        \end{equation*}
+    \end{itemize}
+\end{itemize}
+
+\end{document}

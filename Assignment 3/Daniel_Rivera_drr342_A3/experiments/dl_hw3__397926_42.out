@@ -1,0 +1,115 @@
+python /home/drr342/dl/assignments/hw3/examples/word_language_model/main.py --data /home/drr342/dl/assignments/hw3/examples/word_language_model/data/wikitext-2 --save /home/drr342/dl/assignments/hw3/models/GRU'_'200'_'2'_'64.pt --cuda --model GRU --epochs 10 --emsize 200 --nlayers 2 --bptt 64
+
+| epoch   1 |   200/ 1631 batches | lr 20.00 | ms/batch 72.78 | loss  9.20 | ppl  9909.11
+| epoch   1 |   400/ 1631 batches | lr 20.00 | ms/batch 71.69 | loss  7.32 | ppl  1504.95
+| epoch   1 |   600/ 1631 batches | lr 20.00 | ms/batch 71.66 | loss  6.70 | ppl   816.23
+| epoch   1 |   800/ 1631 batches | lr 20.00 | ms/batch 71.68 | loss  6.37 | ppl   581.65
+| epoch   1 |  1000/ 1631 batches | lr 20.00 | ms/batch 71.71 | loss  6.20 | ppl   495.09
+| epoch   1 |  1200/ 1631 batches | lr 20.00 | ms/batch 71.71 | loss  6.02 | ppl   413.55
+| epoch   1 |  1400/ 1631 batches | lr 20.00 | ms/batch 71.77 | loss  5.94 | ppl   378.16
+| epoch   1 |  1600/ 1631 batches | lr 20.00 | ms/batch 72.07 | loss  5.79 | ppl   328.52
+-----------------------------------------------------------------------------------------
+| end of epoch   1 | time: 121.85s | valid loss  5.68 | valid ppl   292.43
+-----------------------------------------------------------------------------------------
+| epoch   2 |   200/ 1631 batches | lr 20.00 | ms/batch 72.46 | loss  5.81 | ppl   333.45
+| epoch   2 |   400/ 1631 batches | lr 20.00 | ms/batch 72.24 | loss  5.65 | ppl   282.94
+| epoch   2 |   600/ 1631 batches | lr 20.00 | ms/batch 72.28 | loss  5.61 | ppl   273.35
+| epoch   2 |   800/ 1631 batches | lr 20.00 | ms/batch 72.33 | loss  5.58 | ppl   264.05
+| epoch   2 |  1000/ 1631 batches | lr 20.00 | ms/batch 72.34 | loss  5.54 | ppl   253.70
+| epoch   2 |  1200/ 1631 batches | lr 20.00 | ms/batch 72.35 | loss  5.44 | ppl   229.34
+| epoch   2 |  1400/ 1631 batches | lr 20.00 | ms/batch 72.31 | loss  5.41 | ppl   223.14
+| epoch   2 |  1600/ 1631 batches | lr 20.00 | ms/batch 72.32 | loss  5.34 | ppl   207.76
+-----------------------------------------------------------------------------------------
+| end of epoch   2 | time: 122.57s | valid loss  5.47 | valid ppl   238.28
+-----------------------------------------------------------------------------------------
+| epoch   3 |   200/ 1631 batches | lr 20.00 | ms/batch 72.72 | loss  5.41 | ppl   224.58
+| epoch   3 |   400/ 1631 batches | lr 20.00 | ms/batch 72.34 | loss  5.26 | ppl   191.89
+| epoch   3 |   600/ 1631 batches | lr 20.00 | ms/batch 72.38 | loss  5.26 | ppl   192.29
+| epoch   3 |   800/ 1631 batches | lr 20.00 | ms/batch 72.48 | loss  5.28 | ppl   195.75
+| epoch   3 |  1000/ 1631 batches | lr 20.00 | ms/batch 72.47 | loss  5.26 | ppl   192.84
+| epoch   3 |  1200/ 1631 batches | lr 20.00 | ms/batch 72.50 | loss  5.18 | ppl   177.00
+| epoch   3 |  1400/ 1631 batches | lr 20.00 | ms/batch 72.53 | loss  5.15 | ppl   172.68
+| epoch   3 |  1600/ 1631 batches | lr 20.00 | ms/batch 72.59 | loss  5.11 | ppl   165.00
+-----------------------------------------------------------------------------------------
+| end of epoch   3 | time: 122.85s | valid loss  5.38 | valid ppl   216.49
+-----------------------------------------------------------------------------------------
+| epoch   4 |   200/ 1631 batches | lr 20.00 | ms/batch 72.84 | loss  5.19 | ppl   180.22
+| epoch   4 |   400/ 1631 batches | lr 20.00 | ms/batch 72.50 | loss  5.04 | ppl   154.46
+| epoch   4 |   600/ 1631 batches | lr 20.00 | ms/batch 72.48 | loss  5.06 | ppl   157.81
+| epoch   4 |   800/ 1631 batches | lr 20.00 | ms/batch 72.44 | loss  5.10 | ppl   163.44
+| epoch   4 |  1000/ 1631 batches | lr 20.00 | ms/batch 72.38 | loss  5.09 | ppl   162.47
+| epoch   4 |  1200/ 1631 batches | lr 20.00 | ms/batch 72.51 | loss  5.01 | ppl   149.42
+| epoch   4 |  1400/ 1631 batches | lr 20.00 | ms/batch 72.58 | loss  4.99 | ppl   147.51
+| epoch   4 |  1600/ 1631 batches | lr 20.00 | ms/batch 72.47 | loss  4.96 | ppl   141.91
+-----------------------------------------------------------------------------------------
+| end of epoch   4 | time: 122.89s | valid loss  5.20 | valid ppl   180.67
+-----------------------------------------------------------------------------------------
+| epoch   5 |   200/ 1631 batches | lr 20.00 | ms/batch 72.61 | loss  5.05 | ppl   155.71
+| epoch   5 |   400/ 1631 batches | lr 20.00 | ms/batch 72.26 | loss  4.90 | ppl   133.67
+| epoch   5 |   600/ 1631 batches | lr 20.00 | ms/batch 72.19 | loss  4.92 | ppl   137.06
+| epoch   5 |   800/ 1631 batches | lr 20.00 | ms/batch 72.39 | loss  4.97 | ppl   143.78
+| epoch   5 |  1000/ 1631 batches | lr 20.00 | ms/batch 72.32 | loss  4.96 | ppl   142.13
+| epoch   5 |  1200/ 1631 batches | lr 20.00 | ms/batch 72.18 | loss  4.88 | ppl   132.28
+| epoch   5 |  1400/ 1631 batches | lr 20.00 | ms/batch 72.36 | loss  4.87 | ppl   130.95
+| epoch   5 |  1600/ 1631 batches | lr 20.00 | ms/batch 72.38 | loss  4.84 | ppl   126.38
+-----------------------------------------------------------------------------------------
+| end of epoch   5 | time: 122.57s | valid loss  5.15 | valid ppl   172.48
+-----------------------------------------------------------------------------------------
+| epoch   6 |   200/ 1631 batches | lr 20.00 | ms/batch 72.71 | loss  4.93 | ppl   138.40
+| epoch   6 |   400/ 1631 batches | lr 20.00 | ms/batch 72.29 | loss  4.78 | ppl   118.94
+| epoch   6 |   600/ 1631 batches | lr 20.00 | ms/batch 72.28 | loss  4.81 | ppl   123.11
+| epoch   6 |   800/ 1631 batches | lr 20.00 | ms/batch 72.31 | loss  4.87 | ppl   129.77
+| epoch   6 |  1000/ 1631 batches | lr 20.00 | ms/batch 72.24 | loss  4.87 | ppl   129.84
+| epoch   6 |  1200/ 1631 batches | lr 20.00 | ms/batch 72.28 | loss  4.79 | ppl   120.73
+| epoch   6 |  1400/ 1631 batches | lr 20.00 | ms/batch 72.06 | loss  4.78 | ppl   118.91
+| epoch   6 |  1600/ 1631 batches | lr 20.00 | ms/batch 72.13 | loss  4.75 | ppl   115.16
+-----------------------------------------------------------------------------------------
+| end of epoch   6 | time: 122.50s | valid loss  5.10 | valid ppl   163.63
+-----------------------------------------------------------------------------------------
+| epoch   7 |   200/ 1631 batches | lr 20.00 | ms/batch 72.57 | loss  4.84 | ppl   126.15
+| epoch   7 |   400/ 1631 batches | lr 20.00 | ms/batch 72.37 | loss  4.69 | ppl   108.70
+| epoch   7 |   600/ 1631 batches | lr 20.00 | ms/batch 72.42 | loss  4.72 | ppl   112.57
+| epoch   7 |   800/ 1631 batches | lr 20.00 | ms/batch 72.50 | loss  4.78 | ppl   118.94
+| epoch   7 |  1000/ 1631 batches | lr 20.00 | ms/batch 76.36 | loss  4.79 | ppl   120.04
+| epoch   7 |  1200/ 1631 batches | lr 20.00 | ms/batch 75.05 | loss  4.71 | ppl   110.66
+| epoch   7 |  1400/ 1631 batches | lr 20.00 | ms/batch 75.89 | loss  4.70 | ppl   109.91
+| epoch   7 |  1600/ 1631 batches | lr 20.00 | ms/batch 77.34 | loss  4.67 | ppl   106.97
+-----------------------------------------------------------------------------------------
+| end of epoch   7 | time: 126.02s | valid loss  5.07 | valid ppl   159.84
+-----------------------------------------------------------------------------------------
+| epoch   8 |   200/ 1631 batches | lr 20.00 | ms/batch 76.94 | loss  4.75 | ppl   116.04
+| epoch   8 |   400/ 1631 batches | lr 20.00 | ms/batch 75.04 | loss  4.61 | ppl   100.47
+| epoch   8 |   600/ 1631 batches | lr 20.00 | ms/batch 75.57 | loss  4.65 | ppl   104.87
+| epoch   8 |   800/ 1631 batches | lr 20.00 | ms/batch 74.63 | loss  4.71 | ppl   110.63
+| epoch   8 |  1000/ 1631 batches | lr 20.00 | ms/batch 74.28 | loss  4.72 | ppl   112.01
+| epoch   8 |  1200/ 1631 batches | lr 20.00 | ms/batch 74.37 | loss  4.64 | ppl   103.23
+| epoch   8 |  1400/ 1631 batches | lr 20.00 | ms/batch 75.37 | loss  4.63 | ppl   102.66
+| epoch   8 |  1600/ 1631 batches | lr 20.00 | ms/batch 75.43 | loss  4.60 | ppl    99.81
+-----------------------------------------------------------------------------------------
+| end of epoch   8 | time: 127.41s | valid loss  5.05 | valid ppl   155.86
+-----------------------------------------------------------------------------------------
+| epoch   9 |   200/ 1631 batches | lr 20.00 | ms/batch 75.85 | loss  4.69 | ppl   108.58
+| epoch   9 |   400/ 1631 batches | lr 20.00 | ms/batch 76.58 | loss  4.54 | ppl    93.94
+| epoch   9 |   600/ 1631 batches | lr 20.00 | ms/batch 75.63 | loss  4.59 | ppl    98.52
+| epoch   9 |   800/ 1631 batches | lr 20.00 | ms/batch 75.78 | loss  4.65 | ppl   104.19
+| epoch   9 |  1000/ 1631 batches | lr 20.00 | ms/batch 76.16 | loss  4.66 | ppl   105.53
+| epoch   9 |  1200/ 1631 batches | lr 20.00 | ms/batch 78.36 | loss  4.58 | ppl    97.38
+| epoch   9 |  1400/ 1631 batches | lr 20.00 | ms/batch 76.60 | loss  4.57 | ppl    96.65
+| epoch   9 |  1600/ 1631 batches | lr 20.00 | ms/batch 76.09 | loss  4.55 | ppl    95.02
+-----------------------------------------------------------------------------------------
+| end of epoch   9 | time: 129.40s | valid loss  5.05 | valid ppl   156.33
+-----------------------------------------------------------------------------------------
+| epoch  10 |   200/ 1631 batches | lr 5.00 | ms/batch 76.67 | loss  4.57 | ppl    96.29
+| epoch  10 |   400/ 1631 batches | lr 5.00 | ms/batch 75.98 | loss  4.38 | ppl    79.82
+| epoch  10 |   600/ 1631 batches | lr 5.00 | ms/batch 74.76 | loss  4.39 | ppl    80.85
+| epoch  10 |   800/ 1631 batches | lr 5.00 | ms/batch 74.75 | loss  4.41 | ppl    82.61
+| epoch  10 |  1000/ 1631 batches | lr 5.00 | ms/batch 74.29 | loss  4.40 | ppl    81.45
+| epoch  10 |  1200/ 1631 batches | lr 5.00 | ms/batch 74.35 | loss  4.29 | ppl    73.12
+| epoch  10 |  1400/ 1631 batches | lr 5.00 | ms/batch 74.37 | loss  4.24 | ppl    69.73
+| epoch  10 |  1600/ 1631 batches | lr 5.00 | ms/batch 74.26 | loss  4.20 | ppl    66.66
+-----------------------------------------------------------------------------------------
+| end of epoch  10 | time: 126.97s | valid loss  4.88 | valid ppl   132.14
+-----------------------------------------------------------------------------------------
+=========================================================================================
+| End of training | test loss  4.82 | test ppl   123.85
+=========================================================================================
